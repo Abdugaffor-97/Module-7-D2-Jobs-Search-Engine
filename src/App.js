@@ -7,9 +7,11 @@ import { BrowserRouter, Route } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Route path="/" exact component={Home} />
-      <Route path="/detail" exact component={Detail} />
+      <div className="App">
+        <Navbar />
+        <Route path="/" exact component={Home} />
+        <Route path="/detail" exact component={Detail} />
+      </div>
     </BrowserRouter>
   );
 }
