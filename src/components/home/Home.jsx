@@ -6,6 +6,8 @@ export default function Home() {
   const [form, setForm] = useState({ position: "", location: "" });
   const [jobs, setJobs] = useState(null);
 
+  const [selectedJob, setSelectedJob] = useState(null);
+
   const updateForm = (e) => {
     const newForm = { ...form };
     const currentId = e.target.id;
@@ -32,7 +34,7 @@ export default function Home() {
 
   return (
     <header>
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} className="text-center">
         <label htmlFor="position">Postion </label>
         <input
           id="position"
@@ -58,9 +60,12 @@ export default function Home() {
 
       {jobs && (
         <div className="row">
-          <h3>Results</h3>
-          <Joblist jobs={jobs} />
-          <JobDetail />
+          <Joblist
+            jobs={jobs}
+            selectedJob={selectedJob}
+            setSelectedJob={setSelectedJob}
+          />
+          <JobDetail selectedJob={selectedJob} />
         </div>
       )}
     </header>

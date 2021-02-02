@@ -1,13 +1,13 @@
 import Job from "../job";
 
-function Joblist({ jobs, changeJob, selectedJob }) {
+function Joblist({ jobs, setSelectedJob, selectedJob }) {
   return (
-    <ul>
+    <ul className="col-md-4">
       {jobs.map((job, idx) => (
         <Job
           {...job}
           key={idx}
-          changeJob={changeJob}
+          setSelectedJob={setSelectedJob}
           selectedJob={selectedJob}
         />
       ))}
