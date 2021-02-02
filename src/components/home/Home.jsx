@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import Joblist from "../joblist";
+import JobDetail from "../detail";
 
 export default function Home() {
   const [form, setForm] = useState({ position: "", location: "" });
-  // const [data, setData] = useState(null);
+  const [jobs, setJobs] = useState(null);
 
   const updateForm = (e) => {
     const newForm = { ...form };
@@ -11,29 +13,26 @@ export default function Home() {
     setForm(newForm);
   };
 
-  const fetchData = async () => {
+  const submitForm = async (e) => {
+    e.preventDefault();
+
     try {
-      const url =
-        "https://jobs.github.com/positions.json?description=frontend&location=berlin";
+      const url = `https://cors-anywhere-lk.herokuapp.com/https://jobs.github.com/positions.json?description=${form.position}&full_time=true&location=${form.location}`;
 
-      let response = await fetch(url, {
-        headers: new Headers({ mode: "no-cors" }),
-      });
-
-      let data = await response.json();
-      console.log(data);
+      let response = await fetch(url);
+      if (response.ok) {
+        let data = await response.json();
+        setJobs(data);
+        console.log(data);
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <header>
-      <form>
+      <form onSubmit={submitForm}>
         <label htmlFor="position">Postion </label>
         <input
           id="position"
@@ -56,6 +55,14 @@ export default function Home() {
         <br />
         <button type="submit">Search</button>
       </form>
+
+      {jobs && (
+        <div className="row">
+          <h3>Results</h3>
+          <Joblist jobs={jobs} />
+          <JobDetail />
+        </div>
+      )}
     </header>
   );
 }
