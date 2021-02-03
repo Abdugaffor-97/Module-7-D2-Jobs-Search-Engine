@@ -35,4 +35,4 @@ const Job = (props) => (
   </div>
 );
 
-export default connect(mapDispatchToProps)(Job);
+export default connect(null, mapDispatchToProps)(Job);
