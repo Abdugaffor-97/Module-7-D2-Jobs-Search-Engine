@@ -1,7 +1,8 @@
-export default function Detail({ selectedJob }) {
-  return selectedJob ? (
+export default function Detail(props) {
+  console.log(props);
+  return false ? (
     <div className="col-md-8">
-      <div className="row mt-2">
+      {/* <div className="row mt-2">
         <div className="col-sm-12">
           <h1>{selectedJob.title}</h1>
         </div>
@@ -26,7 +27,7 @@ export default function Detail({ selectedJob }) {
             Add Campare
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   ) : (
     <div className="col-sm-8">

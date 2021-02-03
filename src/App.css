@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  margin-top: 30px;
 }
 
 .job-container {
@@ -21,7 +22,6 @@
 .job-image {
   height: 80px;
   margin-right: 2em;
-  max-width: 200px;
 }
 
 .background-div {

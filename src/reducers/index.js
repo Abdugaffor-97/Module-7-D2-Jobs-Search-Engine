@@ -5,6 +5,12 @@ const store = (state = {}, action) => {
         ...state,
       };
 
+    case "UPDATE_SELECTED_JOB":
+      return {
+        ...state,
+        selectedJob: action.payload,
+      };
+
     default:
       return state;
   }

@@ -4,7 +4,9 @@ import rootReducer from "../reducers";
 const initialState = {
   user: {
     username: null,
+    favourites: [],
   },
+  selectedJob: null,
 };
 
 export default function configureStore() {

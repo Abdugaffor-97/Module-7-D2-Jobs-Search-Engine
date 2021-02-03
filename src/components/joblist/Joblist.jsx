@@ -1,15 +1,10 @@
 import Job from "../job";
 
-function Joblist({ jobs, setSelectedJob, selectedJob }) {
+function Joblist({ jobs }) {
   return (
     <>
       {jobs.map((job, idx) => (
-        <Job
-          {...job}
-          key={idx}
-          setSelectedJob={setSelectedJob}
-          selectedJob={selectedJob}
-        />
+        <Job job={job} key={idx} />
       ))}
     </>
   );
