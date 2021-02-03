@@ -1,3 +1,5 @@
+import Button from "@material-ui/core/Button";
+
 const Job = ({
   id,
   title,
@@ -6,11 +8,10 @@ const Job = ({
   setSelectedJob,
   JobSelected,
 }) => (
-  <li
+  <div
     onClick={() => setSelectedJob(id)}
-    className={JobSelected === id ? "border-thick card mt-3" : "card mt-3"}
+    className={JobSelected === id ? "border-thick " : "job-container"}
     key={title}
-    style={{ cursor: "pointer" }}
   >
     <div className="media card-body">
       <img className="job-image" src={company_logo} alt="Job cover" />
@@ -19,7 +20,13 @@ const Job = ({
         <p>{company}</p>
       </div>
     </div>
-  </li>
+    <Button variant="contained" color="primary">
+      Add To Compare
+    </Button>
+    <Button variant="contained" color="primary">
+      Details
+    </Button>
+  </div>
 );
 
 export default Job;

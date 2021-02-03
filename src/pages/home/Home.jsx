@@ -1,8 +1,35 @@
 import { useState } from "react";
-import Joblist from "../joblist";
-import JobDetail from "../detail";
+import Joblist from "../../components/joblist";
+import Button from "@material-ui/core/Button";
+
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
+}));
+
+export function BasicTextFields() {
+  const classes = useStyles();
+
+  return (
+    <form className={classes.root} noValidate autoComplete="off">
+      <TextField id="standard-basic" label="Standard" />
+      <TextField id="filled-basic" label="Filled" variant="filled" />
+      <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <Button>search</Button>
+    </form>
+  );
+}
 
 export default function Home() {
+  const classes = useStyles();
   const [form, setForm] = useState({ position: "", location: "" });
   const [jobs, setJobs] = useState(null);
 
@@ -34,28 +61,33 @@ export default function Home() {
 
   return (
     <header>
-      <form onSubmit={submitForm} className="text-center">
-        <label htmlFor="position">Postion </label>
-        <input
+      <form
+        onSubmit={submitForm}
+        className={classes.root}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
           id="position"
           value={form.position}
           type="text"
           name="position"
           onChange={updateForm}
+          label="Position"
         />
         <br />
-        <br />
-        <label htmlFor="location">Location </label>
-        <input
+        <TextField
           id="location"
           value={form.location}
           type="text"
           name="location"
           onChange={updateForm}
+          label="Location"
         />
         <br />
-        <br />
-        <button type="submit">Search</button>
+        <Button variant="contained" color="secondary" type="submit">
+          search
+        </Button>
       </form>
 
       {jobs && (
@@ -65,7 +97,6 @@ export default function Home() {
             selectedJob={selectedJob}
             setSelectedJob={setSelectedJob}
           />
-          <JobDetail selectedJob={selectedJob} />
         </div>
       )}
     </header>
