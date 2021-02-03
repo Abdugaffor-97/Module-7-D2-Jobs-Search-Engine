@@ -1,41 +1,24 @@
-export default function Detail(props) {
-  console.log(props);
-  return false ? (
-    <div className="col-md-8">
-      {/* <div className="row mt-2">
-        <div className="col-sm-12">
-          <h1>{selectedJob.title}</h1>
-        </div>
-      </div>
-      <div className="row mt-3">
-        <div className="col-sm-5 mt-3">
-          <img
-            className="book-cover"
-            src={selectedJob.imageUrl}
-            alt="book selected"
-          />
-        </div>
-        <div className="col-sm-7">
-          <p>
-            <span className="font-weight-bold">Description:</span>{" "}
-            {selectedJob.description}
-          </p>
-          <p>
-            <span className="font-weight-bold"></span> {selectedJob.type}
-          </p>
-          <button onClick={() => this.props.addToCart(selectedJob.id)}>
-            Add Campare
-          </button>
-        </div>
-      </div> */}
-    </div>
-  ) : (
-    <div className="col-sm-8">
-      <div className="row mt-2">
-        <div className="col-sm-12">
-          <h3>Please select a Job!</h3>
-        </div>
+import { connect } from "react-redux";
+
+const mapStateToProps = (state) => state;
+
+const Detail = ({ selectedJob }) => {
+  console.log(selectedJob);
+  return (
+    <div style={{ textAlign: "start", margin: "10px 15px" }}>
+      <div>
+        <h3>
+          Company: {selectedJob.company}{" "}
+          <a href={selectedJob.company_url} rel="noreferrer" target="_blank">
+            more details
+          </a>
+        </h3>
+        <div>Posted: {selectedJob.created_at}</div>
+
+        <p dangerouslySetInnerHTML={{ __html: selectedJob.description }}></p>
       </div>
     </div>
   );
-}
+};
+
+export default connect(mapStateToProps)(Detail);
