@@ -6,6 +6,12 @@ const jobs = (state = {}, action) => {
         joblist: action.payload,
       };
 
+    case "SET_JOB_LIST_ERROR":
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

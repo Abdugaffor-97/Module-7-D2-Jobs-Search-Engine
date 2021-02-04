@@ -4,7 +4,7 @@ import favouritesReducer from "../reducers/favourites";
 import jobsReducer from "../reducers/jobs";
 import thunk from "redux-thunk";
 
-const composedEnhancer = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE || compose;
+const composedEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
   user: {

@@ -16,18 +16,41 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const mapStateToProps = (state) => state.jobs;
+
 const mapDispatchToProps = (dispatch) => ({
   addToFavourite: (id) =>
     dispatch({
       type: "ADD_JOB_TO_FAVOURITE",
       payload: id,
     }),
+
+  setJobs: (form) => {
+    dispatch(async (dispatch, getState) => {
+      const url = `https://cors-anywhere-lk.herokuapp.com/https://jobs.github.com/positions.json?description=${form.position}&full_time=true&location=${form.location}`;
+      const res = await fetch(url);
+
+      if (res.ok) {
+        const data = await res.json();
+        dispatch({
+          type: "UPDATE_JOB_LIST",
+          payload: data,
+        });
+
+        return getState();
+      } else {
+        dispatch({
+          type: "SET_JOB_LIST_ERROR",
+          payload: res.statusText,
+        });
+      }
+    });
+  },
 });
 
-const Home = () => {
+const Home = (props) => {
   const classes = useStyles();
   const [form, setForm] = useState({ position: "", location: "" });
-  const [jobs, setJobs] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const updateForm = (e) => {
@@ -42,20 +65,9 @@ const Home = () => {
     if (e) {
       e.preventDefault();
     }
-
-    try {
-      const url = `https://cors-anywhere-lk.herokuapp.com/https://jobs.github.com/positions.json?description=${form.position}&full_time=true&location=${form.location}`;
-
-      let response = await fetch(url);
-      if (response.ok) {
-        let data = await response.json();
-        setJobs(data);
-        setLoading(false);
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const res = await props.setJobs(form);
+    console.log(res);
+    setLoading(false);
   };
 
   return (
@@ -95,13 +107,13 @@ const Home = () => {
       </form>
 
       {loading && <LinearProgress />}
-      {jobs && (
+      {props.joblist && (
         <div className="row">
-          <Joblist jobs={jobs} />
+          <Joblist jobs={props.joblist} />
         </div>
       )}
     </header>
   );
 };
 
-export default connect(mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

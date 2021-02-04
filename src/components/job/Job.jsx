@@ -8,6 +8,13 @@ const mapDispatchToProps = (dispatch) => ({
       type: "UPDATE_SELECTED_JOB",
       payload: job,
     }),
+
+  addToFavourite: (job) => {
+    dispatch({
+      type: "ADD_JOB_TO_FAVOURITE",
+      payload: job,
+    });
+  },
 });
 
 const Job = (props) =>
@@ -24,7 +31,11 @@ const Job = (props) =>
           <p>{props.job.company}</p>
         </div>
       </div>
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={props.addToFavourite(props.job)}
+      >
         Add To Compare
       </Button>
       <Button
