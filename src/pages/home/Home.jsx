@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
     }),
 
   setJobs: (form) => {
-    dispatch(async (dispatch, getState) => {
+    const state = dispatch(async (dispatch, getState) => {
       const url = `https://cors-anywhere-lk.herokuapp.com/https://jobs.github.com/positions.json?description=${form.position}&full_time=true&location=${form.location}`;
       const res = await fetch(url);
 
@@ -36,15 +36,16 @@ const mapDispatchToProps = (dispatch) => ({
           type: "UPDATE_JOB_LIST",
           payload: data,
         });
-
-        return getState();
       } else {
         dispatch({
           type: "SET_JOB_LIST_ERROR",
           payload: res.statusText,
         });
       }
+
+      return getState();
     });
+    return state;
   },
 });
 
@@ -65,8 +66,7 @@ const Home = (props) => {
     if (e) {
       e.preventDefault();
     }
-    const res = await props.setJobs(form);
-    console.log(res);
+    await props.setJobs(form);
     setLoading(false);
   };
 

@@ -3,7 +3,7 @@ const favourites = (state = {}, action) => {
     case "ADD_JOB_TO_FAVOURITE":
       return {
         ...state,
-        favourites: action.payload,
+        fav_list: state.fav_list.concat(action.payload),
       };
 
     case "REMOVE_JOB_FROM_FAVOURITE":
