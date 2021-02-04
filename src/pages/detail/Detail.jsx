@@ -6,7 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
-const mapStateToProps = (state) => state;
+const mapStateToProps = (state) => state.user;
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,11 +28,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Detail = ({ selectedJob }) => {
-  console.log(selectedJob);
+const Detail = (props) => {
+  console.log(props.selectedJob);
   const classes = useStyles();
 
-  return (
+  return props.selectedJob ? (
     <div style={{ textAlign: "start", margin: "10px 15px" }}>
       <div className={classes.root}>
         <Paper className={classes.paper}>
@@ -42,7 +42,7 @@ const Detail = ({ selectedJob }) => {
                 <img
                   className={classes.img}
                   alt="complex"
-                  src={selectedJob.company_logo}
+                  src={props.selectedJob.company_logo}
                 />
               </ButtonBase>
             </Grid>
@@ -50,21 +50,25 @@ const Detail = ({ selectedJob }) => {
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
-                    {selectedJob.company}{" "}
+                    {props.selectedJob.company}{" "}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     Full resolution 1920x1080 • JPEG
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <a href={selectedJob.url} target="_blank" rel="noreferrer">
+                  <a
+                    href={props.selectedJob.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Apply
                   </a>
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1">
-                  {selectedJob.created_at}
+                  {props.selectedJob.created_at}
                 </Typography>
               </Grid>
             </Grid>
@@ -73,16 +77,24 @@ const Detail = ({ selectedJob }) => {
       </div>
       <div>
         <h3>
-          Company: {selectedJob.company}{" "}
-          <a href={selectedJob.company_url} rel="noreferrer" target="_blank">
+          Company: {props.selectedJob.company}{" "}
+          <a
+            href={props.selectedJob.company_url}
+            rel="noreferrer"
+            target="_blank"
+          >
             more details
           </a>
         </h3>
-        <div>Posted: {selectedJob.created_at}</div>
+        <div>Posted: {props.selectedJob.created_at}</div>
 
-        <p dangerouslySetInnerHTML={{ __html: selectedJob.description }}></p>
+        <p
+          dangerouslySetInnerHTML={{ __html: props.selectedJob.description }}
+        ></p>
       </div>
     </div>
+  ) : (
+    <>{console.log(props)}</>
   );
 };
 
