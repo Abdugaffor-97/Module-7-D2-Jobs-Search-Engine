@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 80px;
   background-color: #fafafa;
 }
 
@@ -34,10 +34,10 @@
   border-width: 3px !important;
   margin: -3px;
 }
-
+/* 
 .cart {
   margin-right: 2%;
   flex-direction: column;
   display: flex;
   margin-left: auto;
-}
+} */

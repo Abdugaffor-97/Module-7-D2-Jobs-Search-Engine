@@ -86,7 +86,6 @@ const Home = (props) => {
           onChange={updateForm}
           label="Position"
         />
-        <br />
         <TextField
           id="location"
           value={form.location}
