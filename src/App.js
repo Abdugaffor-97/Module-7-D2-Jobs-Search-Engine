@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 function App() {
   return (
     <div className="App">
-      <Grid container justify="center">
+      <Grid container justify="center" xs={12}>
         <Navigation />
         <Route path="/" exact component={Home} />
         <Route path="/details/:id" exact component={Detail} />
