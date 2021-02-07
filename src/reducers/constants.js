@@ -1,0 +1,8 @@
+const constants = {
+  UPDATE_JOB_LIST: "UPDATE_JOB_LIST",
+  SET_JOB_LIST_ERROR: "SET_JOB_LIST_ERROR",
+  UPDATE_SELECTED_JOB: "UPDATE_SELECTED_JOB",
+  ADD_TO_COMPARE: "ADD_TO_COMPARE",
+};
+
+export default constants;

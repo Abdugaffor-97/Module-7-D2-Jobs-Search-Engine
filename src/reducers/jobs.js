@@ -1,12 +1,14 @@
+import C from "./constants";
+
 const jobs = (state = {}, action) => {
   switch (action.type) {
-    case "UPDATE_JOB_LIST":
+    case C.UPDATE_JOB_LIST:
       return {
         ...state,
         joblist: action.payload,
       };
 
-    case "SET_JOB_LIST_ERROR":
+    case C.SET_JOB_LIST_ERROR:
       return {
         ...state,
         error: action.payload,

@@ -1,0 +1,14 @@
+{
+  "user": {
+    "username": null,
+    "selectedJob": null
+  },
+  "jobs": {
+    "joblist": [],
+    "error": null
+  },
+  "compare": {
+    "fav_list": [],
+    "error": null
+  }
+}

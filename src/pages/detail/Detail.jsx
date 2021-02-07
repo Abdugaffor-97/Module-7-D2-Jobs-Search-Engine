@@ -5,6 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import Button from "@material-ui/core/Button";
 
 const mapStateToProps = (state) => state.user;
 const useStyles = makeStyles((theme) => ({
@@ -76,6 +77,9 @@ const Detail = (props) => {
         </Paper>
       </div>
       <div>
+        <Button variant="contained" color="primary">
+          Add to compare
+        </Button>
         <h3>
           Company: {props.selectedJob.company}{" "}
           <a

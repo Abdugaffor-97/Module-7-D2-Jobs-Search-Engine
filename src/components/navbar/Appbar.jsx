@@ -4,7 +4,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import GradeIcon from "@material-ui/icons/Grade";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    // flexGrow: 1,
     cursor: "pointer",
     color: "white",
     textDecoration: "none",
+    marginRight: theme.spacing(4),
   },
 }));
 
@@ -40,9 +40,21 @@ export default function MenuAppBar() {
           >
             <b>GitHub</b> Jobs
           </Typography>
-          <Typography align="right">
-            <GradeIcon />
-          </Typography>
+          <Badge badgeContent={4} color="secondary">
+            <Typography
+              variant="h6"
+              align="right"
+              component={Link}
+              to="compare/:id"
+              style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "white",
+              }}
+            >
+              Compare
+            </Typography>
+          </Badge>
         </Toolbar>
       </AppBar>
     </div>
