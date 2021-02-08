@@ -1,14 +1,17 @@
-const favourites = (state = {}, action) => {
+import C from "./constants";
+
+const favourites = (state = [], action) => {
   switch (action.type) {
-    case "ADD_JOB_TO_FAVOURITE":
+    case C.ADD_TO_COMPARE:
       return {
         ...state,
         fav_list: state.fav_list.concat(action.payload),
       };
 
-    case "REMOVE_JOB_FROM_FAVOURITE":
+    case C.REMOVE_FROM_COMPARE:
       return {
         ...state,
+        fav_list: action.payload,
       };
 
     default:

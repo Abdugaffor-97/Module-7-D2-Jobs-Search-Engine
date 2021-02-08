@@ -1,4 +1,4 @@
-const Compare = () => {
+const Compare = (props) => {
   return <div>Compare page</div>;
 };
 

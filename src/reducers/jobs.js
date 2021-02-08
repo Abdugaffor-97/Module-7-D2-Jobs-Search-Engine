@@ -1,6 +1,6 @@
 import C from "./constants";
 
-const jobs = (state = {}, action) => {
+const jobs = (state = [], action) => {
   switch (action.type) {
     case C.UPDATE_JOB_LIST:
       return {
