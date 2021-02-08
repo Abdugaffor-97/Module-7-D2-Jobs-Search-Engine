@@ -1,36 +1,21 @@
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import React from "react";
-
-const mapDispatchToProps = (dispatch) => ({
-  setSelectedJob: (job) =>
-    dispatch({
-      type: "UPDATE_SELECTED_JOB",
-      payload: job,
-    }),
-
-  addToFavourite: (job) => {
-    dispatch({
-      type: "ADD_JOB_TO_FAVOURITE",
-      payload: job,
-    });
-  },
-});
+import {
+  addToFavourite,
+  setSelectedJob,
+  removeFromFavourite,
+} from "../../reducers/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Job = (props) => {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-    checkedF: true,
-    checkedG: true,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  const dispatch = useDispatch();
+  const { fav_list } = useSelector((state) => state.compare);
+  const [checked, setChecked] = React.useState(
+    props.job.id === fav_list.find((fav_job) => props.job.id === fav_job.id)
+  );
 
   return props.job ? (
     <div className="job-container" style={{ position: "relative" }}>
@@ -38,15 +23,19 @@ const Job = (props) => {
         style={{ textAlign: "left" }}
         control={
           <Checkbox
-            checked={state.checkedA}
-            onChange={handleChange}
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
             name="checkedA"
-            onClick={props.addToFavourite(props.job)}
+            onClick={() => dispatch(addToFavourite(props.job))}
             style={{ textAlign: "left" }}
           />
         }
         label="Add To Compare"
       />
+      {console.log(
+        "s",
+        fav_list.find((fav_job) => props.job.id === fav_job.id)
+      )}
       <div className="media card-body">
         <img
           className="job-image"
@@ -58,25 +47,12 @@ const Job = (props) => {
           <p>{props.job.company}</p>
         </div>
       </div>
-      {/* <Button
-        variant="contained"
-        color="primary"
-        onClick={props.addToFavourite(props.job)}
-      >
-        <Checkbox
-          checked={state.checkedA}
-          onChange={handleChange}
-          name="checkedA"
-        />
-        Add To Compare
-      </Button> */}
-
       <Button
         component={Link}
         to={`/details/${props.job.id}`}
         variant="contained"
         color="primary"
-        onClick={() => props.setSelectedJob(props.job)}
+        onClick={() => dispatch(setSelectedJob(props.job))}
       >
         Details
       </Button>
@@ -86,4 +62,4 @@ const Job = (props) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(Job);
+export default Job;

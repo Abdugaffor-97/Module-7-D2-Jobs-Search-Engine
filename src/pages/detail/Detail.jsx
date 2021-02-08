@@ -1,19 +1,16 @@
-import { connect } from "react-redux";
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import Button from "@material-ui/core/Button";
 import useStyles from "./style";
-
-const mapStateToProps = (state) => state.user;
+import { useSelector } from "react-redux";
 
 const Detail = (props) => {
-  console.log(props.selectedJob);
   const classes = useStyles();
+  const { selectedJob } = useSelector((state) => state.user);
 
-  return props.selectedJob ? (
+  return selectedJob ? (
     <div style={{ textAlign: "start", margin: "10px 15px" }}>
       <div className={classes.root}>
         <Paper className={classes.paper}>
@@ -23,7 +20,7 @@ const Detail = (props) => {
                 <img
                   className={classes.img}
                   alt="complex"
-                  src={props.selectedJob.company_logo}
+                  src={selectedJob.company_logo}
                 />
               </ButtonBase>
             </Grid>
@@ -31,25 +28,21 @@ const Detail = (props) => {
               <Grid item xs container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
-                    {props.selectedJob.company}{" "}
+                    {selectedJob.company}{" "}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
                     Full resolution 1920x1080 • JPEG
                   </Typography>
                 </Grid>
                 <Grid item>
-                  <a
-                    href={props.selectedJob.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
+                  <a href={selectedJob.url} target="_blank" rel="noreferrer">
                     Apply
                   </a>
                 </Grid>
               </Grid>
               <Grid item>
                 <Typography variant="subtitle1">
-                  {props.selectedJob.created_at}
+                  {selectedJob.created_at}
                 </Typography>
               </Grid>
             </Grid>
@@ -57,24 +50,28 @@ const Detail = (props) => {
         </Paper>
       </div>
       <div>
-        <Button variant="contained" color="primary">
-          Add to compare
-        </Button>
+        {/* <FormControlLabel
+          style={{ textAlign: "left" }}
+          control={
+            <Checkbox
+              checked={checked}
+              onChange={(e) => setChecked(e.target.checked)}
+              name="checkedA"
+              onClick={() => dispatch(addToFavourite(props.job))}
+              style={{ textAlign: "left" }}
+            />
+          }
+          label="Add To Compare"
+        /> */}
         <h3>
-          Company: {props.selectedJob.company}{" "}
-          <a
-            href={props.selectedJob.company_url}
-            rel="noreferrer"
-            target="_blank"
-          >
+          Company: {selectedJob.company}{" "}
+          <a href={selectedJob.company_url} rel="noreferrer" target="_blank">
             more details
           </a>
         </h3>
-        <div>Posted: {props.selectedJob.created_at}</div>
+        <div>Posted: {selectedJob.created_at}</div>
 
-        <p
-          dangerouslySetInnerHTML={{ __html: props.selectedJob.description }}
-        ></p>
+        <p dangerouslySetInnerHTML={{ __html: selectedJob.description }}></p>
       </div>
     </div>
   ) : (
@@ -82,4 +79,4 @@ const Detail = (props) => {
   );
 };
 
-export default connect(mapStateToProps)(Detail);
+export default Detail;

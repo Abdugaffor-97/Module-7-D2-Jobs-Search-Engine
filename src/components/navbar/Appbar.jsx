@@ -1,31 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Badge from "@material-ui/core/Badge";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    cursor: "pointer",
-    color: "white",
-    textDecoration: "none",
-    marginRight: theme.spacing(4),
-  },
-}));
+import { useSelector } from "react-redux";
 
 export default function MenuAppBar() {
   const classes = useStyles();
+  const { fav_list } = useSelector((state) => state.compare);
 
   return (
     <div className={classes.root}>
@@ -40,12 +24,12 @@ export default function MenuAppBar() {
           >
             <b>GitHub</b> Jobs
           </Typography>
-          <Badge badgeContent={4} color="secondary">
+          <Badge badgeContent={fav_list.length} color="secondary">
             <Typography
               variant="h6"
               align="right"
               component={Link}
-              to="compare/:id"
+              to="/compare"
               style={{
                 cursor: "pointer",
                 textDecoration: "none",

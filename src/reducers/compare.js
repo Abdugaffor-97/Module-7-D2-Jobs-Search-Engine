@@ -11,7 +11,9 @@ const favourites = (state = [], action) => {
     case C.REMOVE_FROM_COMPARE:
       return {
         ...state,
-        fav_list: action.payload,
+        fav_list: state.fav_list.filter(
+          (favJob) => favJob.id !== action.payload
+        ),
       };
 
     default:
