@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
+import Joblist from "../../components/joblist";
 
-const Compare = (props) => {
+const Compare = () => {
   const { fav_list } = useSelector((state) => state.compare);
 
-  return fav_list.map((fav_job, idx) => <h1 key={idx}>job</h1>);
+  return (
+    <div>
+      {fav_list.length ? <Joblist jobs={fav_list} /> : <h1>Select A Job</h1>}
+    </div>
+  );
 };
 
 export default Compare;
